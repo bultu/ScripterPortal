@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+
+	<package name="default" extends="struts-default" namespace="/">
+
+		 <action name="login" class="com.centurylink.bot.action.LoginAction">
+			<result name="success">userhome.jsp</result>
+			<result name="done">adminHome.jsp</result>
+			<result name="input">login.jsp</result>
+			<result name="error">login.jsp</result>
+		</action>
+		
+		 <action name="selectAction" class="com.centurylink.bot.action.NewUserRegAction"  method="display">
+			<result name="none">newuserreg.jsp</result>
+   		</action>
+   		
+   		<action name="signup" class="com.centurylink.bot.action.NewUserRegAction">
+			<result name="error">newuserreg.jsp</result>
+			<result name="success">userdetails.jsp</result>
+		</action>
+   		
+   		<action name="forgotpassword" class="com.centurylink.bot.action.ForgotPasswordAction">
+			<result name="error">forgotpassword.jsp</result>
+			<result name="success">userdetails.jsp</result>			
+		</action>
+		
+		<action name="getDeActiveUsers" class="com.centurylink.bot.action.GetUsers" method="getDeActiveUsers">
+			<result name="error">adminHome.jsp</result>
+			<result name="success">deActivateUsers.jsp</result>			
+		</action>
+		
+		<action name="getActiveUsers" class="com.centurylink.bot.action.GetUsers" method="getActiveUsers">
+			<result name="error">adminHome.jsp</result>
+			<result name="success">activateUsers.jsp</result>			
+		</action>
+		
+		<action name="deActiveUsers" class="com.centurylink.bot.action.GetUsers" method="deActiveUsers">
+			<result name="error">activateUsers.jsp</result>
+			<result name="success" type="chain">getDeActiveUsers</result>
+		</action>
+		
+		<action name="activeUsers" class="com.centurylink.bot.action.GetUsers" method="activeUsers">
+			<result name="error">deActivateUsers.jsp</result>
+			<result name="success" type="chain">getActiveUsers</result>
+		</action>
+		
+		
+		<!--
+		<action name="testloader" class="com.centurylink.oes.action.TestLoader">
+			<result name="error">welcome.jsp</result>
+			<result name="javatest">javatest.jsp</result>
+			<result name="j2eetest">j2eetest.jsp</result>
+		</action>
+		<action name="result" class="com.centurylink.oes.action.ResultEvaluator">
+			<result name="error">welcome.jsp</result>
+			<result name="success">result.jsp</result>
+			<result name="j2eetest">j2eetest.jsp</result>
+		</action>
+		
+		
+		
+		<action name="signup" class="com.centurylink.oes.action.NewUserReg">
+			<result name="error">newuserreg.jsp</result>
+			<result name="success">userdetails.jsp</result>
+			<result name="j2eetest">j2eetest.jsp</result>
+		</action>
+		
+		
+   		
+   		<action name="newRequest" class="com.centurylink.oes.action.NewRequestAction">
+			<result name="error">newrequests.jsp</result>
+			<result name="success">newrequests.jsp</result>
+			<result name="j2eetest">j2eetest.jsp</result>
+		</action>
+		
+   		<action name="authorize" class="com.centurylink.oes.action.RequestValidatorAction">
+			<result type="chain" name="success">
+            <param name="actionName">newRequest</param>           
+        	</result>
+        	<result type="chain" name="error">
+            <param name="actionName">newRequest</param>           
+        	</result>			
+		</action>
+		
+		<action name="allUsers" class="com.centurylink.oes.action.AllUserAction">
+			<result name="error">allusers.jsp</result>
+			<result name="success">allusers.jsp</result>
+		</action>
+		
+		<action name="deauthorize" class="com.centurylink.oes.action.RequestValidatorAction">
+			<result type="chain" name="done">
+            <param name="actionName">allUsers</param>           
+        	</result>
+        	<result type="chain" name="error">
+            <param name="actionName">allUsers</param>           
+        	</result>			
+		</action>
+		
+		<action name="editgroups" class="com.centurylink.oes.action.GroupEditAction">
+			<result name="error">editgroups.jsp</result>
+			<result name="success">editgroups.jsp</result>
+		</action>
+		
+		<action name="group" class="com.centurylink.oes.action.GroupRequestValidatorAction">
+			<result type="chain" name="done">
+            <param name="actionName">editgroups</param>           
+        	</result>
+        	<result type="chain" name="success">
+            <param name="actionName">editgroups</param>           
+        	</result>
+        	<result type="chain" name="error">
+            <param name="actionName">editgroups</param>           
+        	</result>			
+		</action>
+		<action name="editExam" class="com.centurylink.oes.action.EditExamAction">
+			<result name="error">editexams.jsp</result>
+			<result name="success">editexams.jsp</result>
+		</action>
+		
+		<action name="validateExam" class="com.centurylink.oes.action.ExamValidatorAction">
+			<result type="chain" name="done">
+            <param name="actionName">editExam</param>           
+        	</result>
+        	<result type="chain" name="success">
+            <param name="actionName">addExam</param>           
+        	</result>
+        	<result type="chain" name="error">
+            <param name="actionName">editExam</param>           
+        	</result>
+        	<result name="none" type="chain">
+				 <param name="actionName" >editExam</param>
+			</result>			
+			
+			<result name="input" >editpaper.jsp	</result>
+				
+		</action>
+		
+		<action name="editpaper" class="com.centurylink.oes.action.EditPaperAction" >
+			<result name="success" type="chain"><param name="actionName" >validateExam</param></result>
+			<result name="none" type="chain">
+				<param name="actionName">editExam</param>
+			</result>
+		</action>
+		
+		
+		
+		<action name="addExam" class="com.centurylink.oes.action.AddExamAction" method ="display" >
+			<result name="success">addtest.jsp</result>
+			<result name="none">addtest.jsp</result>
+		</action>
+		
+		<action name="addTest" class="com.centurylink.oes.action.AddExamAction">
+			<result name="error" type="chain">
+				<param name="actionName" >addExam</param> 
+			</result>
+			
+			<result name="success" type="chain">
+				 <param name="actionName">addExam</param>  
+			</result>
+			
+			<result name="done" type="chain">
+				 <param name="actionName">editExam</param>  
+			</result>
+		</action>
+		
+		<action name="modifyQuestion" class="com.centurylink.oes.action.ModifyQuestionAction" >
+			<result name="success" type="chain"><param name="actionName">validateExam</param></result>
+			<result name="error">editpaper.jsp</result>
+		</action>
+		
+		<action name="authorizeAction" class="com.centurylink.oes.action.TestAuthorizeAction"  method="display">
+			<result name="none">authorizetests.jsp</result>
+   		</action>
+   		
+		<action name="testAuthorizerAction" class="com.centurylink.oes.action.TestAuthorizeAction">
+			<result name="success" type="chain">
+				<param name="actionName">authorizeAction</param>
+			</result>
+			
+   		</action>
+   		
+   		<action name="testhistory" class="com.centurylink.oes.action.TestHistoryAction">
+			<result name="success">testhistory.jsp</result>
+   		</action>
+   		
+   		
+   		
+   		<action name="scheduledtests" class="com.centurylink.oes.action.ScheduledTestsAction">
+			<result name="success">scheduledtests.jsp</result>
+   		</action>
+   		
+   		
+   		<action name="taketest" class="com.centurylink.oes.action.TakeTestAction">
+			<result name="success">taketest.jsp</result>
+			<result name="error">taketest.jsp</result>
+			<result name="none">taketest.jsp</result>
+   		</action>
+   		
+   		<action name="calculatescore" class="com.centurylink.oes.action.CalculateScoreAction">
+			<result name="success">result.jsp</result>
+   		</action>
+   		 -->
+
+	</package>
+</struts>
