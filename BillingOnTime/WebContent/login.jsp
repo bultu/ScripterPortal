@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
-<html>
+<!DOCTYPE html >
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Sign in &middot; Ensemble CSM Noida</title>
@@ -15,14 +16,14 @@
 body {
 	padding-top: 40px;
 	padding-bottom: 40px;
-	background-color: #f5f5f5;
+	background-color: #ffffff;
 }
 
 .form-signin {
 	max-width: 300px;
 	padding: 19px 29px 29px;
 	margin: 0 auto 20px;
-	background-color: #fff;
+	background-color: #f5f5f5;
 	border: 1px solid #e5e5e5;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -55,13 +56,15 @@ body {
 <link rel="shortcut icon" href="bootstrap/ico/favicon.png">
 </head>
 
-<body>
+<body  background ="bootstrap\img\bot_1080x1200.jpg" style = " background-repeat : no-repeat;">
 
-<h3 class="form-signin-heading" style="left: 38%; position: absolute;">ENSEMBLE	CSM - NOIDA</h3>
-<div class="container" style="top: 20%; position: relative;">
-	<form class="form-signin" name="jsscall" id="011" method="post" action="login.action">
-		<input type="text" class="input-block-level" placeholder="cuid"	id="username" name="username"> 
-		<input type="password" class="input-block-level" placeholder="Password" name="password"	id="Password">
+<h3  class="form-signin-heading" style="left: 65%; position: absolute;">ENSEMBLE	CSM - NOIDA</h3>
+<!-- <h3> Ensemble CSM Noida </h3> -->
+<div class="container" style="top: 20%; position: relative; left: 28%;">
+	<form class="form-signin" name="jsscall" id="011" method="post" action="login.action" >
+		<h2 class="form-signin-heading">Sign In</h2>
+		<input type="text" class="input-block-level" placeholder="cuid"	id="username" name="username" style="right: 3%; position: relative;"> 
+		<input type="password" class="input-block-level" placeholder="Password" name="password"	id="Password" style="right: 3%; position: relative;">
 			<button class=" btn btn-large btn-primary" type="submit">Sign in</button><br><br>
 			<s:a href="newuserreg.jsp"
 				>New User Login</s:a>
